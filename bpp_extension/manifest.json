@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	
+	"name": "BlankPlusPlus",
+	"short_name": "B++",
+	"version": "1.0",
+	"description": "The emptiest new tab extension.",
+	"homepage_url": "https://github.com/kjerk/blankplusplus-chrome",
+	"author": "kjerk <2738686+kjerk@users.noreply.github.com>",
+	
+	"icons": {
+		"16": "icons/icon16.png",
+		"48": "icons/icon48.png",
+		"128": "icons/icon128.png"
+	},
+	
+	"chrome_url_overrides": {
+		"newtab": "src/override/override.html"
+	},
+	
+	"action": {},
+	"background": {},
+	"content_scripts": [],
+	"host_permissions": [],
+	"permissions": []
+}
