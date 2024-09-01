@@ -2,63 +2,67 @@ name: Create New Release
 
 # Trigger workflow manually
 on:
-    workflow_dispatch:
-        inputs:
-            version:
-                description: 'Version number for the release'
-                required: true
-            publish_to_chrome:
-                description: 'Publish to Chrome Web Store'
-                required: true
-                default: false
-                type: boolean
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number for the release'
+        required: true
+      publish_to_chrome:
+        description: 'Publish to Chrome Web Store'
+        required: true
+        default: false
+        type: boolean
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        permissions:
-          contents: write
-        
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    env:
+      VERSION: ${{ github.event.inputs.version }}
+      RELEASE_FOLDER_NAME: bpp-chrome-release-v${{ github.event.inputs.version }}
+      ZIP_FILENAME: bpp-chrome-release-v${{ github.event.inputs.version }}.zip
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          echo "Reticulating splines..."
+          echo "Beep boop done."
+
+      - name: Build extension
+        run: |
+          echo "Executing BlankPlusPlus enhanced AI Build system..."
+          echo "Extracting DNA from the void..."
+          echo "Compiling the universe..."
+          echo "Beep boop done."
+
+      - name: Zip extension
+        run: |
+          mkdir $RELEASE_FOLDER_NAME
+          cp -r ./bpp_extension/* $RELEASE_FOLDER_NAME
+          zip -r $ZIP_FILENAME $RELEASE_FOLDER_NAME
+
+      - name: Publish release on GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          body: Release of version ${{ env.VERSION }}
+          files: ${{ env.ZIP_FILENAME }}
         env:
-            VERSION: ${{ github.event.inputs.version }}
-            ZIP_FILENAME: bpp-chrome-release-v${{ github.event.inputs.version }}.zip
-        
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Install dependencies
-              run: |
-                echo "Installing dependencies..."
-                echo "Reticulating splines..."
-                echo "Beep boop done."
-
-            - name: Build extension
-              run: |
-                echo "Executing BlankPlusPlus enhanced AI Build system..."
-                echo "Extracting DNA from the void..."
-                echo "Compiling the universe..."
-                echo "Beep boop done."
-
-            - name: Zip extension
-              run: zip -r $ZIP_FILENAME bpp_extension/*
-
-            - name: Publish release on GitHub
-              uses: softprops/action-gh-release@v2
-              with:
-                  tag_name: v${{ env.VERSION }}
-                  name: v${{ env.VERSION }}
-                  body: Release of version ${{ env.VERSION }}
-                  files: ${{ env.ZIP_FILENAME }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Publish to Chrome Web Store
-              if: ${{ github.event.inputs.publish_to_chrome == true }}
-              uses: wdzeng/chrome-extension@v1
-              with:
-                  extension-id: blank-plus-plus
-                  zip-path: ${{ env.ZIP_FILENAME }}
-                  client-id: ${{ secrets.CHROME_CLIENT_ID }}
-                  client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-                  refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      - name: Publish to Chrome Web Store
+        if: ${{ github.event.inputs.publish_to_chrome == true }}
+        uses: wdzeng/chrome-extension@v1
+        with:
+          extension-id: blank-plus-plus
+          zip-path: ${{ env.ZIP_FILENAME }}
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
