@@ -6,7 +6,7 @@
 
 ## Welcome to the Future of Browser Tabs 🚀
 
-Introducing **Blank++**, the ultimate solution to your Chromium tab woes. In a world filled with clutter, chaos, and waste, we bring you the pinnacle of digital minimalism – a **completely blank** new tab page.
+Introducing the **Blank++** Chromium extension, the ultimate solution to your Chromium tab woes. In a world filled with clutter, chaos, and waste, we bring you the pinnacle of digital minimalism – a **completely blank** new tab page.
 
 ---
 
