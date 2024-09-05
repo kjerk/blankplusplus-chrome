@@ -35,7 +35,8 @@ We’ve conducted extensive testing to ensure Blank++™️ remains the gold sta
 ---
 
 ### 📲 Installation
- You can download the latest release on the [Releases Page](https://github.com/kjerk/blankplusplus-chrome/releases), or can simply go to the Chrome Store to install Blank++.
+* Install directly in the [Chrome Web Store](https://chromewebstore.google.com/detail/blankplusplus/bnfphonlipmepcghdcjknmjcdhhgjbmh)
+* Or you can download the latest release on the [Releases Page](https://github.com/kjerk/blankplusplus-chrome/releases), and follow from step 2 of the manual install instructions.
 
 ### 📲 Manual Installation
 1. Clone the repository:
